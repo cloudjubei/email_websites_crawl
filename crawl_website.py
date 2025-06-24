@@ -6,7 +6,18 @@ import re
 import time
 from find_email import find_emails_content
 
+def remove_repeated_segments(url):
+    parsed = urlparse(url)
+    segments = parsed.path.split('/')
+    normalized_segments = []
+    
+    for segment in segments:
+        if segment and (not normalized_segments or segment != normalized_segments[-1]):
+            normalized_segments.append(segment)
+    normalized_path = '/'.join(normalized_segments)
+    return parsed._replace(path=normalized_path).geturl()
 def normalize_url(url):
+    url = remove_repeated_segments(url)
     parsed_url = urlparse(url)
     path = parsed_url.path.rstrip('/').replace('.html', '')
     return f"{parsed_url.scheme}://{parsed_url.netloc}{path}".lower()
@@ -14,7 +25,7 @@ def normalize_url(url):
 def is_valid_link(url, base_url):
     ignored_extensions = ('.webmanifest', '.png', '.svg', '.js', '.css', '.ico', '.jpg', '.jpeg', '.gif', '.pdf', '.vcf')
     return (not url.endswith(ignored_extensions) and 
-            'blog' not in url and
+            # 'blog' not in url and
             # '#' not in url and
             urlparse(url).netloc == base_url)
 

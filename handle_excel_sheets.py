@@ -9,8 +9,11 @@ def read_sheets_file(file_name):
         ws1 = wb.active
         ws1.title = "websites"
         ws1.append(["WEBSITE", "LINKS", "EMAILS"])
-        # ws1.append(["www.wooga.com", "", ""])
         # ws1.append(["www.crux-consulting.ai", "", ""])
+        # ws1.append(["www.fock-nuezel-tanz.de", "", ""])
+        # ws1.append(["www.tanzschule-dumser.de", "", ""])
+        # ws1.append(["www.danzamundial.com", "", ""])
+        # ws1.append(["www.geraldine-colomba.de", "", ""])
 
         ws2 = wb.create_sheet(title="emails")
         ws2.append(["EMAIL", "DONE", "NAME", "SURNAME", "GENDER", "TITLE", "POSITION", "COMPANY", "ADDRESS", "TELEPHONE", "", "", "", "", "", "LINKEDIN", "LINKS"])
